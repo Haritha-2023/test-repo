@@ -38,6 +38,11 @@ resource "azurerm_databricks_workspace" "myworkspace" {
   sku                           = "trial"
 }
 
+# Create the cluster with the "smallest" amount
+# of resources allowed.
+data "databricks_node_type" "smallest" {
+  local_disk = true
+}
 
 # Use the latest Databricks Runtime
 # Long Term Support (LTS) version.
