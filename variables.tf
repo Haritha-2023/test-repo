@@ -31,3 +31,8 @@ variable "node_type_id" {
   default     = "Standard_DS3_v2"
 }
 
+variable "spark_version" {
+  description = "Spark Runtime Version for databricks clusters"
+  default     = "7.3.x-scala2.12"
+}
+
