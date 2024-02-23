@@ -4,8 +4,7 @@ terraform {
       source = "databricks/databricks"      
     }
     azurerm = {
-      source = "hashicorp/azurerm"
-      version = "~> 3.0.2"
+      source = "hashicorp/azurerm"      
     }
   }
   cloud {
@@ -41,30 +40,16 @@ resource "azurerm_databricks_workspace" "myworkspace" {
 
 
 
-resource "databricks_cluster" "shared_autoscaling" {
-  cluster_name            = "${var.prefix}-Autoscaling-Cluster"
-  spark_version           = var.spark_version
-  node_type_id            = var.node_type_id
-  autotermination_minutes = 90
-  autoscale {
-    min_workers = var.min_workers
-    max_workers = var.max_workers
-  }
-  library {
-    pypi {
-        package = "scikit-learn==0.23.2"
-        // repo can also be specified here
-        }
+resource "databricks_cluster" "this" {
+  cluster_name            = var.cluster_name
+  node_type_id            = data.databricks_node_type.smallest.id
+  spark_version           = data.databricks_spark_version.latest_lts.id
+  autotermination_minutes = var.cluster_autotermination_minutes
+  num_workers             = var.cluster_num_workers
+}
 
-    }
-  library {
-    pypi {
-        package = "fbprophet==0.6"
-        }
-  }
-  custom_tags = {
-    Department = "Engineering"
-  }
+output "cluster_url" {
+ value = databricks_cluster.this.url
 }
 
 resource "databricks_notebook" "notebook" {
