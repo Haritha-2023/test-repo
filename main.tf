@@ -46,9 +46,9 @@ data "databricks_node_type" "smallest" {
 
 # Use the latest Databricks Runtime
 # Long Term Support (LTS) version.
-data "databricks_spark_version" "latest_lts" {
-  long_term_support = true
-}
+#data "databricks_spark_version" "latest_lts" {
+#  long_term_support = true
+#}
 
 resource "databricks_cluster" "this" {
   cluster_name            = var.cluster_name
