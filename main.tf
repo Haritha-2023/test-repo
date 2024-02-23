@@ -8,6 +8,12 @@ terraform {
       version = "2.29.0"
     }
   }
+  cloud {
+    organization = "AzureDatabricks"
+    workspaces {
+      name = "azure-databricks"
+    }
+  }
 }
 
 
