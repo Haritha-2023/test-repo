@@ -1,17 +1,17 @@
 terraform {
   required_providers {
     databricks = {
-      source = "databrickslabs/databricks"
-      version = "0.2.5"
+      source = "databricks/databricks"      
     }
     azurerm = {
-      version = "2.29.0"
+      source = "hashicorp/azurerm"
+      version = "~> 3.0.2"
     }
   }
   cloud {
     organization = "AzureDatabricks"
     workspaces {
-      name = "azure-databricks"
+      name = "Azure-cluster"
     }
   }
 }
