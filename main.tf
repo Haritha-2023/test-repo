@@ -39,12 +39,6 @@ resource "azurerm_databricks_workspace" "myworkspace" {
   sku                           = "trial"
 }
 
-resource "databricks_scim_user" "admin" {
-  user_name    = "admin@example.com"
-  display_name = "Admin user"
-  set_admin    = true
-  default_roles = []
-}
 
 
 resource "databricks_cluster" "shared_autoscaling" {
