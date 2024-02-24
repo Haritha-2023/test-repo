@@ -52,7 +52,7 @@ data "databricks_node_type" "smallest" {
 
 resource "databricks_cluster" "this" {
   cluster_name            = var.cluster_name
-  node_type_id            = data.databricks_node_type.smallest.id
+  node_type_id            = var.node_type_id
   spark_version           = var.spark_version
   autotermination_minutes = var.cluster_autotermination_minutes
   num_workers             = var.cluster_num_workers
